@@ -7,15 +7,12 @@ fruit_juice = LpVariable(name="Fruit_Juice", lowBound=0, cat="Integer")
 
 model += lemonade + fruit_juice, "Total"
 
-# Обмеження ресурсів
 model += (2 * lemonade + fruit_juice <= 100, "Water")
 model += (1 * lemonade <= 50, "Sugar")
 model += (1 * lemonade <= 30, "Lemon_Juice")
 model += (2 * fruit_juice <= 40, "Fruit")
 
-# Розв'язуємо задачу без виводу додаткової інформації
 model.solve(PULP_CBC_CMD(msg=False))
 
-# Виводимо результати
 print(f"Oprimal amount of Lemonade: {lemonade.varValue}")
 print(f"Oprimal amount of Fruit Juice: {fruit_juice.varValue}")
